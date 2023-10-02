@@ -1,10 +1,10 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_art/reusable_widget/reusable_widget.dart';
 import 'package:firebase_art/screens/home_screen.dart';
 import 'package:firebase_art/screens/signup_screen.dart';
 import 'package:firebase_art/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -20,7 +20,6 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -36,7 +35,6 @@ class _SignInScreenState extends State<SignInScreen> {
             child: Column(
               children: <Widget>[
                 logoWidget("assets/images/logo.png"),
-               
                 const SizedBox(
                   height: 30,
                 ),
@@ -65,37 +63,54 @@ class _SignInScreenState extends State<SignInScreen> {
                 }),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    children: [
-                    Expanded(child: Divider(
-                      thickness: 0.5,
-                      color: Colors.grey[400],
-                     ),
-                     ),
-                   ]
-                  ),
-                 ),
+                  child: Row(children: [
+                    Expanded(
+                      child: Divider(
+                        thickness: 0.5,
+                        color: Colors.grey[400],
+                      ),
+                    ),
+                  ]),
+                ),
                 signUpOption(),
                 const SizedBox(height: 30),
-                logos(),  
+                logos(),
               ],
             ),
           ),
         ),
       ),
-
-      
     );
   }
 
-  Row logos(){
-
+  Row logos() {
     return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      iconWidget("assets/images/google_logo.png"),
-                const SizedBox(height: 5,),  
-    ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () async {
+            PermissionStatus cameraStatus = 
+              await Permission.camera.request();
+
+            if(cameraStatus == PermissionStatus.granted){
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("This permission is granted.")));
+            }
+            if(cameraStatus == PermissionStatus.denied){
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text("This permission is recommened.")));
+
+            }
+            if(cameraStatus == PermissionStatus.permanentlyDenied){
+              openAppSettings();
+            }
+            print("Logo taped");
+          },
+          child: iconWidget("assets/images/google_logo.png")),
+        const SizedBox(
+          height: 5,
+        ),
+      ],
     );
   }
 
@@ -125,7 +140,7 @@ class _SignInScreenState extends State<SignInScreen> {
       height: 35,
       alignment: Alignment.bottomRight,
       child: TextButton(
-        onPressed: () {  },
+        onPressed: () {},
         child: const Text(
           "Forgot Password?",
           style: TextStyle(color: Colors.white70),
