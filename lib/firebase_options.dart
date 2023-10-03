@@ -44,37 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCSgYQOewvscfGOtw-rztTWxK1tv3J_YQM',
-    appId: '1:192851965709:web:6f8e3881434bef700a6244',
-    messagingSenderId: '192851965709',
-    projectId: 'scrapy-7e02a',
-    authDomain: 'scrapy-7e02a.firebaseapp.com',
-    storageBucket: 'scrapy-7e02a.appspot.com',
+    apiKey: 'AIzaSyApNxwscPiZtHnIfG75_xTduHDvZ_231dA',
+    appId: '1:859100727065:web:048fa006efa287c021a788',
+    messagingSenderId: '859100727065',
+    projectId: 'scrapyart-79035',
+    authDomain: 'scrapyart-79035.firebaseapp.com',
+    storageBucket: 'scrapyart-79035.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDL_NwazjkBsZUKP_YLtpgCHs1oF_-iVYg',
-    appId: '1:192851965709:android:1ac6a197b0dfeaaa0a6244',
-    messagingSenderId: '192851965709',
-    projectId: 'scrapy-7e02a',
-    storageBucket: 'scrapy-7e02a.appspot.com',
+    apiKey: 'AIzaSyA6OhHOhi6GnRFB1rVS0wNZ2Llm6iTgHw0',
+    appId: '1:859100727065:android:65b1df3e752c52a521a788',
+    messagingSenderId: '859100727065',
+    projectId: 'scrapyart-79035',
+    storageBucket: 'scrapyart-79035.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB0cF0qVUVDYgwTvauxyIsmHIqEgIk1Rvk',
-    appId: '1:192851965709:ios:3f24fb70f55905370a6244',
-    messagingSenderId: '192851965709',
-    projectId: 'scrapy-7e02a',
-    storageBucket: 'scrapy-7e02a.appspot.com',
-    iosBundleId: 'com.example.flutter_application_1',
+    apiKey: 'AIzaSyDaCJicNAWTNoFwP_ms2SjH-BFgao4xQ3U',
+    appId: '1:859100727065:ios:5d8c073f5efab88421a788',
+    messagingSenderId: '859100727065',
+    projectId: 'scrapyart-79035',
+    storageBucket: 'scrapyart-79035.appspot.com',
+    iosBundleId: 'com.example.scrapyart',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB0cF0qVUVDYgwTvauxyIsmHIqEgIk1Rvk',
-    appId: '1:192851965709:ios:42afa8cd8af75d470a6244',
-    messagingSenderId: '192851965709',
-    projectId: 'scrapy-7e02a',
-    storageBucket: 'scrapy-7e02a.appspot.com',
-    iosBundleId: 'com.example.flutter_application_1.RunnerTests',
+    apiKey: 'AIzaSyDaCJicNAWTNoFwP_ms2SjH-BFgao4xQ3U',
+    appId: '1:859100727065:ios:93b07f61206ed8d021a788',
+    messagingSenderId: '859100727065',
+    projectId: 'scrapyart-79035',
+    storageBucket: 'scrapyart-79035.appspot.com',
+    iosBundleId: 'com.example.scrapyart.RunnerTests',
   );
 }
