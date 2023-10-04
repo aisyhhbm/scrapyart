@@ -13,8 +13,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _confirmpasswordTextController =
-      TextEditingController();
+  final TextEditingController _confirmpasswordTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _userNameTextController = TextEditingController();
   final TextEditingController _NameTextController = TextEditingController();

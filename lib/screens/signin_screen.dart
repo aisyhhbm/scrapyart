@@ -1,3 +1,4 @@
+import 'package:firebase_art/screens/forgot_passwordpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_art/reusable_widget/reusable_widget.dart';
 import 'package:firebase_art/screens/home_screen.dart';
@@ -55,8 +56,11 @@ class _SignInScreenState extends State<SignInScreen> {
                           email: _emailTextController.text,
                           password: _passwordTextController.text)
                       .then((value) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const HomeScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()));
+                    print("berhasil login");
                   }).onError((error, stackTrace) {
                     print("Error ${error.toString()}");
                   });
@@ -88,25 +92,23 @@ class _SignInScreenState extends State<SignInScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
-          onTap: () async {
-            PermissionStatus cameraStatus = 
-              await Permission.camera.request();
+            onTap: () async {
+              PermissionStatus cameraStatus = await Permission.camera.request();
 
-            if(cameraStatus == PermissionStatus.granted){
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text("This permission is granted.")));
-            }
-            if(cameraStatus == PermissionStatus.denied){
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text("This permission is recommened.")));
-
-            }
-            if(cameraStatus == PermissionStatus.permanentlyDenied){
-              openAppSettings();
-            }
-            print("Logo taped");
-          },
-          child: iconWidget("assets/images/google_logo.png")),
+              if (cameraStatus == PermissionStatus.granted) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("This permission is granted.")));
+              }
+              if (cameraStatus == PermissionStatus.denied) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("This permission is recommened.")));
+              }
+              if (cameraStatus == PermissionStatus.permanentlyDenied) {
+                openAppSettings();
+              }
+              print("Logo taped");
+            },
+            child: iconWidget("assets/images/google_logo.png")),
         const SizedBox(
           height: 5,
         ),
@@ -140,7 +142,16 @@ class _SignInScreenState extends State<SignInScreen> {
       height: 35,
       alignment: Alignment.bottomRight,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return ForgotPasswordPage();
+              },
+            ),
+          );
+        },
         child: const Text(
           "Forgot Password?",
           style: TextStyle(color: Colors.white70),
