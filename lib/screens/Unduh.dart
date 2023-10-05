@@ -31,7 +31,7 @@ class _UnduhScreenState extends State<UnduhScreen> {
               size: 30.0, // Ubah ukuran ikon
             ),
             onPressed: () {
-              // Tambahkan logika ketika ikon close ditekan+
+              // Tambahkan logika ketika ikon close ditekan
               // Misalnya, untuk menutup halaman profil setting
               Navigator.pop(context);
             },
@@ -56,13 +56,14 @@ class _UnduhScreenState extends State<UnduhScreen> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: 50),
             SizedBox(height: 16), // Spacer
             Image.asset(
-              'assets/images/logo.png',
+              'assets/images/scrap.jpeg',
               width: 450,
               height: 238, // Ubah tinggi sesuai kebutuhan Anda
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -110,7 +111,7 @@ class _UnduhScreenState extends State<UnduhScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 80,
+                  height: 50,
                 ),
                 Text(
                   "Bagikan", // Gantilah dengan teks yang sesuai
@@ -124,60 +125,34 @@ class _UnduhScreenState extends State<UnduhScreen> {
                   height: 10,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset(
-                      'assets/images/Instagram.png',
+                      'assets/images/icon_ig.png',
                       width: 50, // Atur lebar gambar sesuai kebutuhan Anda
                       height: 50, // Atur tinggi gambar sesuai kebutuhan Anda
                     ),
                     // Tambahkan gambar dan tombol sosial media lainnya di sini
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
                     Image.asset(
-                      'assets/images/facebook.png',
+                      'assets/images/icon_wa.png',
                       width: 25, // Atur lebar gambar sesuai kebutuhan Anda
                       height: 25, // Atur tinggi gambar sesuai kebutuhan Anda
                     ),
                     // Tambahkan gambar dan tombol sosial media lainnya di sini
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
                     Image.asset(
-                      'assets/images/Wa.png',
+                      'assets/images/icon_fb.png',
                       width: 32, // Atur lebar gambar sesuai kebutuhan Anda
                       height: 32, // Atur tinggi gambar sesuai kebutuhan Anda
                     ),
                     // Tambahkan gambar dan tombol sosial media lainnya di sini
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
                     Image.asset(
-                      'assets/images/google_logo.png',
+                      'assets/images/icon_pesan.png',
                       width: 25, // Atur lebar gambar sesuai kebutuhan Anda
                       height: 25, // Atur tinggi gambar sesuai kebutuhan Anda
                     ),
                     // Tambahkan gambar dan tombol sosial media lainnya di sini
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
                     Image.asset(
-                      'assets/images/Link1.png',
+                      'assets/images/icon_link.png',
                       width: 25, // Atur lebar gambar sesuai kebutuhan Anda
                       height: 25, // Atur tinggi gambar sesuai kebutuhan Anda
                     ),
