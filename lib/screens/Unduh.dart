@@ -124,40 +124,43 @@ class _UnduhScreenState extends State<UnduhScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset(
-                      'assets/images/icon_ig.png',
-                      width: 50, // Atur lebar gambar sesuai kebutuhan Anda
-                      height: 50, // Atur tinggi gambar sesuai kebutuhan Anda
-                    ),
-                    // Tambahkan gambar dan tombol sosial media lainnya di sini
-                    Image.asset(
-                      'assets/images/icon_wa.png',
-                      width: 25, // Atur lebar gambar sesuai kebutuhan Anda
-                      height: 25, // Atur tinggi gambar sesuai kebutuhan Anda
-                    ),
-                    // Tambahkan gambar dan tombol sosial media lainnya di sini
-                    Image.asset(
-                      'assets/images/icon_fb.png',
-                      width: 32, // Atur lebar gambar sesuai kebutuhan Anda
-                      height: 32, // Atur tinggi gambar sesuai kebutuhan Anda
-                    ),
-                    // Tambahkan gambar dan tombol sosial media lainnya di sini
-                    Image.asset(
-                      'assets/images/icon_pesan.png',
-                      width: 25, // Atur lebar gambar sesuai kebutuhan Anda
-                      height: 25, // Atur tinggi gambar sesuai kebutuhan Anda
-                    ),
-                    // Tambahkan gambar dan tombol sosial media lainnya di sini
-                    Image.asset(
-                      'assets/images/icon_link.png',
-                      width: 25, // Atur lebar gambar sesuai kebutuhan Anda
-                      height: 25, // Atur tinggi gambar sesuai kebutuhan Anda
-                    ),
-                    // Tambahkan gambar dan tombol sosial media lainnya di sini
-                  ],
+                SizedBox(
+                  width: 250,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset(
+                        'assets/images/icon_ig.png',
+                        width: 50, // Atur lebar gambar sesuai kebutuhan Anda
+                        height: 50, // Atur tinggi gambar sesuai kebutuhan Anda
+                      ),
+                      // Tambahkan gambar dan tombol sosial media lainnya di sini
+                      Image.asset(
+                        'assets/images/icon_wa.png',
+                        width: 25, // Atur lebar gambar sesuai kebutuhan Anda
+                        height: 25, // Atur tinggi gambar sesuai kebutuhan Anda
+                      ),
+                      // Tambahkan gambar dan tombol sosial media lainnya di sini
+                      Image.asset(
+                        'assets/images/icon_fb.png',
+                        width: 32, // Atur lebar gambar sesuai kebutuhan Anda
+                        height: 32, // Atur tinggi gambar sesuai kebutuhan Anda
+                      ),
+                      // Tambahkan gambar dan tombol sosial media lainnya di sini
+                      Image.asset(
+                        'assets/images/icon_pesan.png',
+                        width: 25, // Atur lebar gambar sesuai kebutuhan Anda
+                        height: 25, // Atur tinggi gambar sesuai kebutuhan Anda
+                      ),
+                      // Tambahkan gambar dan tombol sosial media lainnya di sini
+                      Image.asset(
+                        'assets/images/icon_link.png',
+                        width: 25, // Atur lebar gambar sesuai kebutuhan Anda
+                        height: 25, // Atur tinggi gambar sesuai kebutuhan Anda
+                      ),
+                      // Tambahkan gambar dan tombol sosial media lainnya di sini
+                    ],
+                  ),
                 ),
               ],
             ),
