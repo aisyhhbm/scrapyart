@@ -12,6 +12,8 @@ class UploadScreen extends StatefulWidget {
 
 class _UploadScreenState extends State<UploadScreen> {
   PlatformFile? pickedFile;
+  UploadTask? uploadTask;
+  
 
   Future SelectFile() async {
     final result = await FilePicker.platform.pickFiles();
@@ -28,6 +30,16 @@ class _UploadScreenState extends State<UploadScreen> {
 
     final ref = FirebaseStorage.instance.ref().child(path);
     ref.putFile(file);
+
+    final snapshot = await uploadTask!.whenComplete(() {});
+
+    final urlDownload = await snapshot.ref.getDownloadURL();
+    print('Download Link: $urlDownload');
+
+    setState(() {
+      uploadTask = null;
+    });
+    print("cek email");
   }
 
   @override
@@ -49,7 +61,9 @@ class _UploadScreenState extends State<UploadScreen> {
                 ),
               ),
             ElevatedButton(
-              onPressed: uploadFile,
+              onPressed: () {
+                uploadFile().whenComplete(() => Navigator.of(context).pop());
+              },
               child: const Text('Upload File'),
             ),
             SizedBox(
@@ -62,6 +76,8 @@ class _UploadScreenState extends State<UploadScreen> {
           ],
         ),
       ),
+
     );
+    
   }
 }

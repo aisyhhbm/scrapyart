@@ -1,5 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_art/utils/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore package
 
 class gudangkuScreen extends StatefulWidget {
   const gudangkuScreen({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class _gudangkuScreenState extends State<gudangkuScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: primary,
+        primarySwatch: Colors.blue, // Menggunakan warna biru sebagai contoh
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
@@ -34,9 +35,7 @@ class _gudangkuScreenState extends State<gudangkuScreen> {
                     child: CircleAvatar(
                       backgroundColor: Colors.black,
                       radius: 44,
-                      backgroundImage: AssetImage(
-                        'assets/images/scrap.jpeg',
-                      ),
+                      backgroundImage: AssetImage('assets/images/scrap.jpeg'),
                     ),
                   ),
                   SizedBox(
@@ -71,16 +70,16 @@ class _gudangkuScreenState extends State<gudangkuScreen> {
                 height: 10,
               ),
               Divider(
-                color: Color.fromARGB(43, 3, 3, 3), // Warna garis
-                thickness: 1, // Ketebalan garis
-                indent: 10, // Jarak awal garis dari sisi kiri
-                endIndent: 0, // Jarak akhir garis dari sisi kanan
+                color: Color.fromARGB(43, 3, 3, 3),
+                thickness: 1,
+                indent: 10,
+                endIndent: 0,
               ),
               SizedBox(
                 height: 10,
               ),
               Text(
-                "gudangku", // Gantilah dengan teks yang sesuai
+                "gudangku",
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.normal,
@@ -90,46 +89,34 @@ class _gudangkuScreenState extends State<gudangkuScreen> {
               SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image.asset('images/scrap.jpeg', width: 110, height: 110),
-                  Image.asset('images/foto.jpeg', width: 110, height: 110),
-                  Image.asset('images/scrap.jpeg', width: 110, height: 110),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image.asset('images/foto.jpeg', width: 110, height: 110),
-                  Image.asset('images/scrap.jpeg', width: 110, height: 110),
-                  Image.asset('images/scrap.jpeg', width: 110, height: 110),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image.asset('images/scrap.jpeg', width: 110, height: 110),
-                  Image.asset('images/scrap.jpeg', width: 110, height: 110),
-                  Image.asset('images/foto.jpeg', width: 110, height: 110),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Image.asset('images/scrap.jpeg', width: 110, height: 110),
-                  Image.asset('images/foto.jpeg', width: 110, height: 110),
-                  Image.asset('images/scrap.jpeg', width: 110, height: 110),
-                ],
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('imageURLs')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    return GridView.builder(
+                      itemCount: snapshot.data.docs.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3),
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: EdgeInsets.all(3),
+                          child: Image.network(
+                            snapshot.data.docs[index]['url'],
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Text('Error Loading Image');
+                            },
+                          ),
+                        );
+                      }, 
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -151,4 +138,6 @@ class _gudangkuScreenState extends State<gudangkuScreen> {
       ),
     );
   }
+
+ 
 }

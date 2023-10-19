@@ -7,7 +7,7 @@
 
 
     <application
-        android:label="firebase_art"
+        android:label="scrapy art"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
