@@ -1,6 +1,7 @@
 import 'package:firebase_art/firebase_options.dart';
 import 'package:firebase_art/screens/Unduh.dart';
 import 'package:firebase_art/screens/gudangku.dart';
+import 'package:firebase_art/screens/kirim.dart';
 import 'package:firebase_art/screens/signin_screen.dart';
 import 'package:firebase_art/screens/upload.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const gudangkuScreen(),
+      home: const UploadScreen(),
     );
   }
 }

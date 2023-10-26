@@ -4,7 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 class UploadScreen extends StatefulWidget {
-  const UploadScreen({super.key});
+  const UploadScreen({Key? key}) : super(key: key);
 
   @override
   State<UploadScreen> createState() => _UploadScreenState();
@@ -12,39 +12,40 @@ class UploadScreen extends StatefulWidget {
 
 class _UploadScreenState extends State<UploadScreen> {
   PlatformFile? pickedFile;
-  UploadTask? uploadTask;
-  
+  String? imageUrl;
+  String? thumbnailUrl;
 
-  Future SelectFile() async {
-    final result = await FilePicker.platform.pickFiles();
-    if (result == null) return;
+  Future<void> uploadFile(File file) async {
+    String fileName = file.path.split('/').last;
+    Reference storageReference = FirebaseStorage.instance.ref().child(fileName);
+    UploadTask uploadTask = storageReference.putFile(file);
 
-    setState(() {
-      pickedFile = result.files.first;
-    });
+    TaskSnapshot snapshot = await uploadTask.whenComplete(() {});
+    if (snapshot.state == TaskState.success) {
+      thumbnailUrl = await storageReference.getDownloadURL();
+      print('Thumbnail URL: $thumbnailUrl');
+      setState(() {
+        imageUrl = thumbnailUrl;
+      });
+    } else {
+      print('Upload failed');
+    }
   }
 
-  Future uploadFile() async {
-    final path = 'test/${pickedFile!.name}';
-    final file = File(pickedFile!.path!);
-
-    final ref = FirebaseStorage.instance.ref().child(path);
-    ref.putFile(file);
-
-    final snapshot = await uploadTask!.whenComplete(() {});
-
-    final urlDownload = await snapshot.ref.getDownloadURL();
-    print('Download Link: $urlDownload');
-
-    setState(() {
-      uploadTask = null;
-    });
-    print("cek email");
+  Future<void> selectFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      uploadFile(file);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Upload File'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +63,11 @@ class _UploadScreenState extends State<UploadScreen> {
               ),
             ElevatedButton(
               onPressed: () {
-                uploadFile().whenComplete(() => Navigator.of(context).pop());
+                // Handle the file upload
+                if (pickedFile != null) {
+                  // You can use the 'imageUrl' here, which contains the download URL
+                  print('File uploaded successfully. URL: $imageUrl');
+                }
               },
               child: const Text('Upload File'),
             ),
@@ -70,14 +75,12 @@ class _UploadScreenState extends State<UploadScreen> {
               height: 30,
             ),
             ElevatedButton(
-              onPressed: SelectFile,
+              onPressed: selectFile,
               child: const Text('Select File'),
             ),
           ],
         ),
       ),
-
     );
-    
   }
 }
