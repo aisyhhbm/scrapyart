@@ -1,4 +1,5 @@
 import 'package:firebase_art/screens/forgot_passwordpage.dart';
+import 'package:firebase_art/screens/upload.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_art/reusable_widget/reusable_widget.dart';
 import 'package:firebase_art/screens/home_screen.dart';
@@ -59,7 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomeScreen()));
+                            builder: (context) => const UploadScreen()));
                     print("berhasil login");
                   }).onError((error, stackTrace) {
                     print("Error ${error.toString()}");

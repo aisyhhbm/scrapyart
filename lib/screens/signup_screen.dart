@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_art/reusable_widget/reusable_widget.dart';
 import 'package:firebase_art/screens/signin_screen.dart';
 import 'package:firebase_art/utils/colors.dart';
@@ -13,10 +14,13 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _confirmpasswordTextController = TextEditingController();
+  final TextEditingController _confirmpasswordTextController =
+      TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _userNameTextController = TextEditingController();
   final TextEditingController _NameTextController = TextEditingController();
+  final TextEditingController _ProfileTextController = TextEditingController();
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -153,34 +157,72 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     _confirmpasswordTextController),
                 const SizedBox(height: 10),
 
-                firebaseUIButton(context, "Sign Up", () {
-                  if (_passwordTextController.text ==
-                      _confirmpasswordTextController.text) {
-                    FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
-                            email: _emailTextController.text,
-                            password: _passwordTextController.text)
-                        .then((value) {
+                firebaseUIButton(context, "Sign Up", () async {
+                  if (_userNameTextController.text.isNotEmpty &&
+                      _emailTextController.text.isNotEmpty &&
+                      _passwordTextController.text.isNotEmpty &&
+                      _confirmpasswordTextController.text.isNotEmpty) {
+                    if (_passwordTextController.text ==
+                        _confirmpasswordTextController.text) {
+                      // Melanjutkan pendaftaran
+                      UserCredential userCredential = await FirebaseAuth
+                          .instance
+                          .createUserWithEmailAndPassword(
+                        email: _emailTextController.text,
+                        password: _passwordTextController.text,
+                      );
+
+                      await FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(userCredential.user!.email)
+                          .set({
+                        //'username': userNameTextController.text,
+                        'username': _emailTextController.text.split('@')[0],
+                        'email': _emailTextController.text,
+                        'password': _passwordTextController.text,
+                        'uid': auth.currentUser!.uid,
+                        'createdAt': DateTime.now(),
+                        'profile': _ProfileTextController.text,
+                      });
+
                       print("Created New Account");
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignInScreen()));
-                    }).onError((error, stackTrace) {
-                      print("Error ${error.toString()}");
-                    });
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignInScreen()),
+                      );
+                    } else {
+                      // Kata sandi dan konfirmasi kata sandi tidak cocok
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Error"),
+                            content: Text(
+                                "Password and Confirm Password do not match."),
+                            actions: [
+                              TextButton(
+                                child: Text("Close"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   } else {
-                    // Kata sandi dan konfirmasi kata sandi tidak cocok
+                    // Menampilkan pesan kesalahan jika ada bidang yang kosong
                     showDialog(
                       context: context,
                       builder: (context) {
                         return AlertDialog(
-                          title: Text("Kesalahan"),
-                          content: Text(
-                              "Kata sandi dan konfirmasi kata sandi tidak cocok."),
+                          title: Text("Error"),
+                          content: Text("Please fill in all fields."),
                           actions: [
                             TextButton(
-                              child: Text("Tutup"),
+                              child: Text("Close"),
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
